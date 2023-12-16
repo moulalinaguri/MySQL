@@ -1,1 +1,81 @@
+============================================================SQL_INTERVIEW_QUESTIONS#1==================================================================
+--Difference between TRUNCATE and DELETE commands?
+
+--DELETE command will remove rows from a table based on the condition that we provide in WHERE clause
+--TRUNCATE command will remove all the rows from the table and there will be no data in the the table after we run TRUNCATE command
+
+--TRUNCATE
+--TRUNCATE is faster and uses fewer system and transaction log resources than DELETE
+--TRUNCATE removes the data by deallocating the data pages used to store the tables's data, and only the page deallocation are recorded in the transaction.
+--TRUNCATE removes all rows from a table, but the table structure, its columns, constraints, indexes, and so on, remains. The counter used by an identity for new rows is reset to the seed for the column.
+--You cannot use TRUNCATE TABLE on a table referenced by a FOREIGN KEY constraint, because TRUNCATE TABLE is not logged, it cannot activate a trigger.
+--TRUNCATE connot be rolled BACKUP
+--TRUNCATE is DDL command
+--TRUNCATE resets identity of the TABLE
+
+--DELETE
+--DELETE removes rows one at a time and records an entry in the transaction log for each deleted row.
+--If you want to retain identity counter, use DELETE instead TRUNCATE. If you want to remove table definition and its data, use the DROP TABLE statement.
+--DELETE can be used with or without WHERE clause.
+--DELETE activated TRIGGER
+--DELETE can be rolled back
+--DELETE is DML command
+--DELETE does not reset identity of the table
+
+--DELETE and TRUNCATE both can be rolled back, when surrounded by TRANSACTION if the current session is not closed. 
+--If TRUNCATE is written in Query Editor surrounded by TRANSACTION and if session is closed,it cannot be rolled back but DELETE can be rolled back.
+
+
+TRUNCATE TABLE table_name;
+
+DELETE TABLE table_nam;
+
+DELETE TABLE tables_name WHERE cust_id is NULL;
+
+DROP TABLE table_name;
+
+============================================================SQL_INTERVIEW_QUESTIONS#2==================================================================
+
+--JOINing two tables with NULL values
+
+--table1
+--id
+--1
+--1
+--2
+--2
+--4
+--NULL
+
+--table2
+--id
+--1
+--1
+--1
+--3
+--2
+--NULL
+
+INNER JOIN
+--Only the matching records
+
+LEFT JOIN
+-- Inner Join + Fetch any adiitional records from left table which are not present in right table
+
+RIGHT JOIN
+-- Innner join + Fetch any additional records from right table which are not present in left table
+
+FULL OUTER JOIN / FULL JOIN
+-- Inner join + Fetch any adiitional records from left table which are not present in right table
+------------- + Fetch any additional records from right table which are not present in left table
+
+CROSS JOIN
+-- number of rows in Left table * Number of rows in Right table, except null join null, Null never joins to a NULL
+
+NATURAl JOIN 
+--If there are same column name == INNER JOIN
+--If there is no same column name == CROSS JOIN
+
+============================================================SQL_INTERVIEW_QUESTIONS#3==================================================================
+
 
